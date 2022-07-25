@@ -131,8 +131,8 @@ template <class Key, class Value>
 class AVLTree : public BinarySearchTree<Key, Value>
 {
 public:
-    virtual void insert (const std::pair<const Key, Value> &new_item); // TODO
-    virtual void remove(const Key& key);  // TODO
+    virtual void insert (const std::pair<const Key, Value> &new_item);
+    virtual void remove(const Key& key);
 protected:
     virtual void nodeSwap( AVLNode<Key,Value>* n1, AVLNode<Key,Value>* n2);
 
@@ -156,7 +156,6 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
 
     //this->printRoot(this->root_); //used for debugging
 
-    // TODO
     Key key = new_item.first;
     Value value = new_item.second;
     AVLNode<Key, Value>* temp = static_cast<AVLNode<Key, Value>*>(this->root_);
@@ -168,8 +167,7 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
         this->root_ = node;
         return;
     }
-
-    
+ 
     while(temp->getLeft() != NULL || temp->getRight() != NULL) {
         Key this_key = temp->getKey();
         if(key == this_key) { //update value
@@ -196,7 +194,6 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
             delete node; 
             return;
         }
-    
 
     //temp is the parent
     if(temp->getRight() == NULL && temp->getLeft() != NULL) { //fill in right child
@@ -218,7 +215,6 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
             node->setParent(temp);
         }
     }
-
 
     //fix the balance of the parent
     if((temp->getBalance() == -1) || (temp->getBalance() == 1)) {
@@ -324,8 +320,6 @@ void AVLTree<Key, Value>::insertFix(AVLNode<Key, Value>* p, AVLNode<Key, Value>*
             } 
         }
     }
-
-
 }
 
 /*
@@ -335,8 +329,6 @@ void AVLTree<Key, Value>::insertFix(AVLNode<Key, Value>* p, AVLNode<Key, Value>*
 template<class Key, class Value>
 void AVLTree<Key, Value>:: remove(const Key& key)
 {
-    // TODO
-
     // this->printRoot(this->root_); //used fore debugging
 
 
@@ -397,9 +389,7 @@ void AVLTree<Key, Value>:: remove(const Key& key)
             }
             else {
                 parent->setRight(NULL);
-            }
-                
-                   
+            }      
         }
     }
     else { //pred didnt have a parent
@@ -529,13 +519,6 @@ void AVLTree<Key, Value>::removeFix(AVLNode<Key, Value>* n, int8_t diff) {
             removeFix(p, ndiff);
         }
     }
-
-    
-
-
-    
-    
-    
 }
 
 template<class Key, class Value>
@@ -576,7 +559,6 @@ void AVLTree<Key, Value>::rotateLeft(AVLNode<Key, Value>* node) {
     node->setParent(child);
 
     node->setRight(left);
-
 }
 
 template<class Key, class Value>
@@ -618,7 +600,6 @@ void AVLTree<Key, Value>::rotateRight(AVLNode<Key, Value>* node) {
     node->setParent(child);
 
     node->setLeft(right);
-
 }
 
 template<class Key, class Value>
@@ -638,7 +619,6 @@ bool AVLTree<Key, Value>::zigzig(AVLNode<Key, Value>* g, AVLNode<Key, Value>* p,
             result = true;
         }
     }
-
     return result;
 }
 
@@ -653,16 +633,14 @@ bool AVLTree<Key, Value>::zigzag(AVLNode<Key, Value>* g, AVLNode<Key, Value>* p,
             result = true;
         }
     }
-
+    
     //right then left
     else if(g->getRight() == p) {
         if(p->getLeft() == n) {
             result = true;
         }
     }
-
     return result;
-
 }
 
 template<class Key, class Value>
